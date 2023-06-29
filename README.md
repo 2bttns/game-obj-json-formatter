@@ -1,6 +1,17 @@
 # Game Object Formatter
 This script converts JSON data into a format readable by the 2bttns Console.
 
+#### Warnin
+> The Tags section at the bottom of the output JSON is currently set to have empty strings for `id`, `name`, and `description` fields. <br/> As a result, a new Tag object will be generated in the Console.
+
+## Table of Contents
+1. [Game Objects Model](#game-objects-model)
+2. [Installation](#installation)
+3. [Setup](#setup)
+4. [Usage](#usage)
+5. [Example](#example)
+6. [License](#license)
+
 ## Game Objects Model
 The script converts any size JSON into the data model below. 
 
@@ -36,9 +47,6 @@ interface GameObject {
   [key: string]: any;
 }
 ```
-
-#### Warning
-> The Tags section at the bottom of the output JSON is currently set to have empty strings for `id`, `name`, and `description` fields. <br/> As a result, a new Tag object will be generated in the Console.
 
 ## Installation
 
