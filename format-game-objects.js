@@ -76,7 +76,7 @@ var rl = readline.createInterface({
 // Function to prompt the user for input
 function prompt(question) {
     return new Promise(function (resolve) {
-        rl.question(question, function (answer) {
+        rl.question(question + '\n', function (answer) {
             resolve(answer);
         });
     });

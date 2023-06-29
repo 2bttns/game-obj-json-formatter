@@ -30,7 +30,7 @@ const rl = readline.createInterface({
 // Function to prompt the user for input
 function prompt(question: string): Promise<string> {
   return new Promise((resolve) => {
-    rl.question(question, (answer) => {
+    rl.question(question + '\n', (answer) => {
       resolve(answer);
     });
   });
