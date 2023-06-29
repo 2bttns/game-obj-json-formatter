@@ -1,54 +1,78 @@
-# 2bttns Game Object JSON Formatter
+# Game Object Formatter
+
+This script converts input JSON data into a specific format for game objects. It allows you to map the keys in the input JSON to the corresponding fields in the output JSON.
 
 #### Warning
-> The script assumes the input data has no pre-defined tags. The Tags object at the bottom of the ouput JSON is hardcoded to be empty strings, and will consequently generate a new Tag in the Console.
+> The script assumes the input data has no pre-defined tags. 
 
-## Installation and Running Script
-Install deps:
-```bash
-npm i
-```
+>The Tags object at the bottom of the ouput JSON is hardcoded to be empty strings, and will consequently generate a new Tag in the Console.
 
-Build the script:
-```bash
-tsc format-game-objects.tsx
-```
+## Installation
 
-Run the script:
-```bash
-node format-game-objects.js
-```
+1. Ensure you have Node.js and Yarn installed on your machine.
+2. Clone the repository or download the script file.
+
+## Setup
+
+1. Open a terminal or command prompt.
+2. Navigate to the project directory.
+3. Install the dependencies by running the following command:
+
+   ```bash
+   yarn install
+   ```
 
 ## Usage
 
-The script is terminal based. It will ask you for mapping information. 
+1. Prepare your input JSON file.
+2. Run the script using the following command:
 
-If "none" is selected for a field, the script will autopopulate it with an empty string.
+   ```bash
+   yarn start
+   ```
 
-If a field in your input JSON does not correspond to the output JSON fields, it will not be included in the output JSON.
+3. Follow the prompts to provide the necessary information.
+4. The converted output JSON file will be saved in the `output` folder.
 
-```bash
-Enter the path of the input JSON file:
-/your/path/here
+## Example
 
-Which key in your JSON corresponds to "id" with value type "string"? Enter "none" if none exists.
-myId
+Here's an example of the input JSON:
 
-Which key in your JSON corresponds to "name" with value type "string"? Enter "none" if none exists.
-myName
-
-Which key in your JSON corresponds to "description" with value type "string"? Enter "none" if none exists.
-myDescription
-
-Which key in your JSON corresponds to "tagIds" with value type "object"? Enter "none" if none exists.
-none
-
-Output JSON file saved successfully!
+```json
+{
+  "metadata": [
+    {
+      "tagId": "1",
+      "tagName": "Game Object 1",
+      "tagDescription": "This is game object 1",
+      "customKey1": "Custom Value 1"
+    }
+  ]
+}
 ```
 
-## TO-DOs
+And here's the resulting output JSON:
 
-* [ ] If no ID exists, generate an ID for the game object
-* [ ] Make type safe
-* [ ] Refactor based on tag field requirement fix in Console
+```json
+{
+  "gameObjects": [
+    {
+      "id": "1",
+      "name": "Game Object 1",
+      "description": "This is game object 1",
+      "tagIds": []
+    }
+  ],
+  "tags": [
+    {
+      "id": " ",
+      "name": " ",
+      "description": " "
+    }
+  ]
+}
+```
 
+## License
+
+This project is licensed under the [MIT License](LICENSE).

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as readline from 'readline';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -86,7 +88,7 @@ async function startConversion() {
     const mappings: any = {};
     const fields = Object.keys(outputShape.gameObjects[0]);
     for (const field of fields) {
-      const fieldType = typeof outputShape.gameObjects[0][field];
+      const fieldType = typeof outputShape.gameObjects[0][field as keyof typeof outputShape.gameObjects[0]];
       const promptMessage = `⭐️ Which key in your JSON corresponds to "${field}" with value type "${fieldType}"?` + '\n' + ` 👉 Enter "none" if none exists.`;
       const key = await prompt(promptMessage);
       mappings[field] = key === 'none' ? undefined : key;
