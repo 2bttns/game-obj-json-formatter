@@ -84,14 +84,21 @@ Here's an example of the input JSON:
 
 ```json
 {
-  "metadata": [
-    {
-      "tagId": "1",
-      "tagName": "Game Object 1",
-      "tagDescription": "This is game object 1",
-      "customKey1": "Custom Value 1"
-    }
-  ]
+    "chords": [
+      {
+        "name": "C Major",
+        "notes": ["C", "E", "G"]
+      },
+      {
+        "name": "C Minor",
+        "notes": ["C", "Eb", "G"]
+      },
+      {
+        "name": "D Major",
+        "notes": ["D", "F#", "A"]
+      },
+      ...
+    ]
 }
 ```
 
@@ -101,17 +108,30 @@ And here's the resulting output JSON:
 {
   "gameObjects": [
     {
-      "id": "1",
-      "name": "Game Object 1",
-      "description": "This is game object 1",
+      "id": "cljgvm1w00000679s2l9a5zql",
+      "name": "C Major",
+      "description": "",
       "tagIds": []
-    }
+    },
+    {
+      "id": "cljgvm1w10001679sdppzbk1p",
+      "name": "C Minor",
+      "description": "",
+      "tagIds": []
+    },
+    {
+      "id": "cljgvm1w10002679sda2j6i75",
+      "name": "D Major",
+      "description": "",
+      "tagIds": []
+    },
+    ...
   ],
   "tags": [
     {
-      "id": " ",
-      "name": " ",
-      "description": " "
+      "id": "",
+      "name": "",
+      "description": ""
     }
   ]
 }

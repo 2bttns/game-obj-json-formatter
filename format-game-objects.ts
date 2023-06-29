@@ -58,12 +58,28 @@ function prompt(question: string): Promise<string> {
   });
 }
 
-function convertJSON(input: any, mappings: Record<string, string | undefined>): OutputShape {
+// Function to get nested JSON by path
+function getNestedJSON(input: any, path: string): any {
+  const pathParts = path.split('.');
+  let current = input;
+  for (const part of pathParts) {
+    if (current[part] === undefined) {
+      throw new Error(`Could not find ${part} in the JSON data.`);
+    }
+    current = current[part];
+  }
+  return current;
+}
+
+function convertJSON(input: any, path: string, mappings: Record<string, string | undefined>): OutputShape {
   const output: OutputShape = { ...outputShape };
 
+  // Extract the required nested structure from the input JSON
+  const nestedInput = getNestedJSON(input, path);
+
   // Map the gameObjects based on user mappings
-  if (input.metadata && Array.isArray(input.metadata)) {
-    output.gameObjects = input.metadata.map((item: any) => {
+  if (Array.isArray(nestedInput)) {
+    output.gameObjects = nestedInput.map((item: any) => {
       const gameObject: GameObject = { ...outputShape.gameObjects[0] };
       gameObject.id = cuid();
 
@@ -91,8 +107,6 @@ function convertJSON(input: any, mappings: Record<string, string | undefined>): 
   return output;
 }
 
-
-
 // Function to start the conversion process
 async function startConversion() {
   try {
@@ -102,6 +116,9 @@ async function startConversion() {
     // Read the input JSON file
     const inputData = fs.readFileSync(inputPath, 'utf-8');
     const inputJSON = JSON.parse(inputData);
+
+    // Ask for the path in JSON
+    const jsonPath = await prompt('🔍 Enter the path in JSON (e.g., parent.child.data) where the data to be converted is located: ');
 
     // Create the output folder if it doesn't exist
     const outputFolder = path.join(__dirname, 'output');
@@ -124,7 +141,7 @@ async function startConversion() {
     }
 
     // Convert the input JSON based on user mappings
-    const convertedJSON = convertJSON(inputJSON, mappings);
+    const convertedJSON = convertJSON(inputJSON, jsonPath, mappings);
     const outputData = JSON.stringify(convertedJSON, null, 2);
 
     // Write the output JSON file
