@@ -131,4 +131,4 @@ Your Game Objects are now ready to be Tagged!
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](/MIT_LICENSE.txt).
