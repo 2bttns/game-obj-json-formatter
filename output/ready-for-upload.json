@@ -1,0 +1,29 @@
+{
+  "gameObjects": [
+    {
+      "id": "1",
+      "name": "Game Object 1",
+      "description": " ",
+      "tagIds": []
+    },
+    {
+      "id": "2",
+      "name": "Game Object 2",
+      "description": " ",
+      "tagIds": []
+    },
+    {
+      "id": "3",
+      "name": "Game Object 3",
+      "description": " ",
+      "tagIds": []
+    }
+  ],
+  "tags": [
+    {
+      "id": " ",
+      "name": " ",
+      "description": " "
+    }
+  ]
+}
