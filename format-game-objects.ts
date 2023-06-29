@@ -116,10 +116,8 @@ async function startConversion() {
     const mappings: Record<string, string | undefined> = {};
     const fields = Object.keys(outputShape.gameObjects[0]);
     for (const field of fields) {
-      const fieldType = typeof outputShape.gameObjects[0][field as keyof GameObject];
-      const promptMessage =
-        `⭐️ Which key in your JSON corresponds to "${field}" with value type "${fieldType}"?\n` +
-        ` 👉 Enter "none" if none exists.`;
+      const fieldType = typeof outputShape.gameObjects[0][field];
+      const promptMessage = `⭐️ Which key in your JSON corresponds to "${field}" with value type "${fieldType}"?` + '\n' + ` 👉 Enter "none" if none exists.`;
       const key = await prompt(promptMessage);
       mappings[field] = key === 'none' ? undefined : key;
     }

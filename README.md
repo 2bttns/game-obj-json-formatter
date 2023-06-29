@@ -1,6 +1,5 @@
 # Game Object Formatter
-
-This script converts JSON data into a specific format for game objects. 
+This script converts JSON data into a format readable by the 2bttns Console.
 
 ## Game Objects Model
 The script converts any size JSON into the data model below. You `name` field is required.
