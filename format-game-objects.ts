@@ -11,6 +11,7 @@ interface GameObject {
   name: string;
   description: string;
   tagIds: string[];
+  [key: string]: any;
 }
 
 interface Tag {
