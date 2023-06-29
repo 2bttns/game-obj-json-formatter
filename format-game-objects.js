@@ -110,7 +110,7 @@ function startConversion() {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 6, , 7]);
-                    return [4 /*yield*/, prompt("Enter the path of the input JSON file: ")];
+                    return [4 /*yield*/, prompt("📁 Enter the path of the input JSON file: ")];
                 case 1:
                     inputPath = _a.sent();
                     inputData = fs.readFileSync(inputPath, 'utf-8');
@@ -129,7 +129,7 @@ function startConversion() {
                     if (!(_i < fields_1.length)) return [3 /*break*/, 5];
                     field = fields_1[_i];
                     fieldType = typeof outputShape.gameObjects[0][field];
-                    promptMessage = "Which key in your JSON corresponds to \"".concat(field, "\" with value type \"").concat(fieldType, "\"? Enter \"none\" if none exists.");
+                    promptMessage = "\u2B50\uFE0F Which key in your JSON corresponds to \"".concat(field, "\" with value type \"").concat(fieldType, "\"?") + '\n' + " \uD83D\uDC49 Enter \"none\" if none exists.";
                     return [4 /*yield*/, prompt(promptMessage)];
                 case 3:
                     key = _a.sent();
@@ -142,12 +142,12 @@ function startConversion() {
                     outputData = JSON.stringify(convertJSON(inputJSON, mappings), null, 2);
                     // Write the output JSON file
                     fs.writeFileSync(outputPath, outputData, 'utf-8');
-                    console.log("Output JSON file saved successfully!");
+                    console.log("✅ Output JSON file saved successfully! ✅");
                     rl.close();
                     return [3 /*break*/, 7];
                 case 6:
                     error_1 = _a.sent();
-                    console.error("An error occurred:", error_1);
+                    console.error("❌ An error occurred:", error_1);
                     rl.close();
                     return [3 /*break*/, 7];
                 case 7: return [2 /*return*/];

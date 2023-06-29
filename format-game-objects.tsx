@@ -66,7 +66,7 @@ function convertJSON(input: any, mappings: any): any {
 async function startConversion() {
   try {
     // Ask for the path of the input JSON file
-    const inputPath = await prompt("Enter the path of the input JSON file: ");
+    const inputPath = await prompt("📁 Enter the path of the input JSON file: ");
 
     // Read the input JSON file
     const inputData = fs.readFileSync(inputPath, 'utf-8');
@@ -87,7 +87,7 @@ async function startConversion() {
     const fields = Object.keys(outputShape.gameObjects[0]);
     for (const field of fields) {
       const fieldType = typeof outputShape.gameObjects[0][field];
-      const promptMessage = `Which key in your JSON corresponds to "${field}" with value type "${fieldType}"? Enter "none" if none exists.`;
+      const promptMessage = `⭐️ Which key in your JSON corresponds to "${field}" with value type "${fieldType}"?` + '\n' + ` 👉 Enter "none" if none exists.`;
       const key = await prompt(promptMessage);
       mappings[field] = key === 'none' ? undefined : key;
     }
@@ -97,11 +97,11 @@ async function startConversion() {
 
     // Write the output JSON file
     fs.writeFileSync(outputPath, outputData, 'utf-8');
-    console.log("Output JSON file saved successfully!");
+    console.log("✅ Output JSON file saved successfully! ✅");
 
     rl.close();
   } catch (error) {
-    console.error("An error occurred:", error);
+    console.error("❌ An error occurred:", error);
     rl.close();
   }
 }
