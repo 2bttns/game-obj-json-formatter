@@ -2,7 +2,9 @@
 This script converts JSON data into a format readable by the 2bttns Console.
 
 ## Game Objects Model
-The script converts any size JSON into the data model below. You `name` field is required.
+The script converts any size JSON into the data model below. 
+
+> Your JSON must contain a `name` equivalent field. These values are loaded as choices within your Game buttons.
 
 ```typescript
 const outputShape: OutputShape = {
@@ -22,6 +24,17 @@ const outputShape: OutputShape = {
     }
   ]
 };
+```
+
+Interface Type
+```typescript
+interface GameObject {
+  id: string;
+  name: string;
+  description: string;
+  tagIds: string[];
+  [key: string]: any;
+}
 ```
 
 #### Warning
