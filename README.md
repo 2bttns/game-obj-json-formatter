@@ -1,7 +1,8 @@
 # 2bttns Game Object JSON Formatter
 
 #### Warning
-> The script assumes the input data has no pre-defined tags / tagIds. It will instead instaniate the tagIds field with an empty Array. 
+> The script assumes the input data has no pre-defined tags / tagIds. It will instead instaniate the tagIds field with an empty Array.
+ 
 >The Tags object at the bottom of the ouput JSON is hardcoded to be empty strings, and will consequently generate a new Tag in the Console.
 
 ## Installation and Running Script
