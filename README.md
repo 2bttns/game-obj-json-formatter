@@ -1,6 +1,6 @@
 # Game Object Formatter
 
-This script converts input JSON data into a specific format for game objects. It allows you to map the keys in the input JSON to the corresponding fields in the output JSON.
+This script converts input JSON data into a specific format so you can import your data as game objects in the 2bttns Console. It allows you to map the keys in the input JSON to the corresponding fields in the output JSON.
 
 #### Warning
 > The script assumes the input data has no pre-defined tags. 
