@@ -3,22 +3,41 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 import * as path from 'path';
+import cuid from 'cuid';
 
 // Define the output shape
-const outputShape = {
+interface GameObject {
+  id: string;
+  name: string;
+  description: string;
+  tagIds: string[];
+}
+
+interface Tag {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface OutputShape {
+  gameObjects: GameObject[];
+  tags: Tag[];
+}
+
+const outputShape: OutputShape = {
   gameObjects: [
     {
-      id: " ",
-      name: " ",
-      description: " ",
+      id: '',
+      name: '',
+      description: '',
       tagIds: []
     }
   ],
   tags: [
     {
-      id: " ",
-      name: " ",
-      description: " "
+      id: '',
+      name: '',
+      description: ''
     }
   ]
 };
@@ -38,20 +57,29 @@ function prompt(question: string): Promise<string> {
   });
 }
 
-// Function to convert the input JSON based on user mappings
-function convertJSON(input: any, mappings: any): any {
-  const output: any = { ...outputShape };
+function convertJSON(input: any, mappings: Record<string, string | undefined>): OutputShape {
+  const output: OutputShape = { ...outputShape };
 
   // Map the gameObjects based on user mappings
   if (input.metadata && Array.isArray(input.metadata)) {
     output.gameObjects = input.metadata.map((item: any) => {
-      const gameObject: any = { ...outputShape.gameObjects[0] };
+      const gameObject: GameObject = { ...outputShape.gameObjects[0] };
+      gameObject.id = cuid();
+
       for (const key in mappings) {
         if (mappings.hasOwnProperty(key)) {
           const inputKey = mappings[key];
           if (inputKey !== undefined) {
             const inputValue = item[inputKey];
-            gameObject[key] = inputValue !== undefined ? inputValue : gameObject[key];
+            if (key === 'tagIds') {
+              if (Array.isArray(inputValue)) {
+                gameObject[key as keyof GameObject] = inputValue as string & string[];
+              } else {
+                gameObject[key as keyof GameObject] = inputValue !== undefined ? inputValue : gameObject[key as keyof GameObject];
+              }              
+            } else {
+              gameObject[key as keyof GameObject] = inputValue !== undefined ? inputValue : gameObject[key as keyof GameObject];
+            }
           }
         }
       }
@@ -68,7 +96,7 @@ function convertJSON(input: any, mappings: any): any {
 async function startConversion() {
   try {
     // Ask for the path of the input JSON file
-    const inputPath = await prompt("📁 Enter the path of the input JSON file: ");
+    const inputPath = await prompt('📁 Enter the path of the input JSON file: ');
 
     // Read the input JSON file
     const inputData = fs.readFileSync(inputPath, 'utf-8');
@@ -85,25 +113,28 @@ async function startConversion() {
     const outputPath = path.join(outputFolder, outputFileName);
 
     // Collect user mappings
-    const mappings: any = {};
+    const mappings: Record<string, string | undefined> = {};
     const fields = Object.keys(outputShape.gameObjects[0]);
     for (const field of fields) {
-      const fieldType = typeof outputShape.gameObjects[0][field as keyof typeof outputShape.gameObjects[0]];
-      const promptMessage = `⭐️ Which key in your JSON corresponds to "${field}" with value type "${fieldType}"?` + '\n' + ` 👉 Enter "none" if none exists.`;
+      const fieldType = typeof outputShape.gameObjects[0][field as keyof GameObject];
+      const promptMessage =
+        `⭐️ Which key in your JSON corresponds to "${field}" with value type "${fieldType}"?\n` +
+        ` 👉 Enter "none" if none exists.`;
       const key = await prompt(promptMessage);
       mappings[field] = key === 'none' ? undefined : key;
     }
 
     // Convert the input JSON based on user mappings
-    const outputData = JSON.stringify(convertJSON(inputJSON, mappings), null, 2);
+    const convertedJSON = convertJSON(inputJSON, mappings);
+    const outputData = JSON.stringify(convertedJSON, null, 2);
 
     // Write the output JSON file
     fs.writeFileSync(outputPath, outputData, 'utf-8');
-    console.log("✅ Output JSON file saved successfully! ✅");
+    console.log('✅ Output JSON file saved successfully! ✅');
 
     rl.close();
   } catch (error) {
-    console.error("❌ An error occurred:", error);
+    console.error('❌ An error occurred:', error);
     rl.close();
   }
 }

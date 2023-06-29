@@ -1,0 +1,29 @@
+{
+  "gameObjects": [
+    {
+      "id": "cljgtdvrs0000pa9s7a2y61on",
+      "name": "Game Object 1",
+      "description": "",
+      "tagIds": []
+    },
+    {
+      "id": "cljgtdvrs0001pa9s0sh1h7nc",
+      "name": "Game Object 2",
+      "description": "",
+      "tagIds": []
+    },
+    {
+      "id": "cljgtdvrs0002pa9sbalkfz00",
+      "name": "Game Object 3",
+      "description": "",
+      "tagIds": []
+    }
+  ],
+  "tags": [
+    {
+      "id": "",
+      "name": "",
+      "description": ""
+    }
+  ]
+}
