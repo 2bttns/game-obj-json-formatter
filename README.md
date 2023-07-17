@@ -1,6 +1,12 @@
 # Game Object Formatter
 This script converts JSON data into a format readable by the 2bttns Console.
 
+## Usage 
+
+   ```bash
+   npx @2bttns/formatter
+   ```
+
 #### Warnin
 > The Tags section at the bottom of the output JSON is currently set to have empty strings for `id`, `name`, and `description` fields. <br/> As a result, a new Tag object will be generated in the Console.
 
@@ -51,22 +57,7 @@ interface GameObject {
 }
 ```
 
-## Installation
-
-1. Ensure you have Node.js and Yarn installed on your machine.
-2. Clone the repository or download the script file.
-
-## Setup
-
-1. Open a terminal or command prompt.
-2. Navigate to the project directory.
-3. Install the dependencies by running the following command:
-
-   ```bash
-   yarn install
-   ```
-
-## Usage
+## How To Use
 
 1. Prepare your input JSON file.
 2. Run the script using the following command:

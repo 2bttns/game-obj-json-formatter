@@ -1,5 +1,5 @@
 {
-  "name": "json-converter",
+  "name": "@2bttns/formatter",
   "version": "1.0.2",
   "description": "",
   "main": "./format-game-objects.js",
