@@ -1,13 +1,17 @@
 {
-  "name": "game-objects-converter",
-  "version": "1.0.0",
+  "name": "json-converter",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "./format-game-objects.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node format-game-objects.ts"
+    "start": "node ./format-game-objects.js",
+    "build": "tsc format-game-objects.ts"
   },
-  "author": "",
+  "bin": {
+    "game-objects-converter": "./format-game-objects.js"
+  },
+  "author": "2bttns Company",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^20.3.2",

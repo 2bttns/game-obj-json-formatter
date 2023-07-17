@@ -3,7 +3,7 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 import * as path from 'path';
-import cuid from 'cuid';
+import cuid = require('cuid');
 
 // Define the output shape
 interface GameObject {
